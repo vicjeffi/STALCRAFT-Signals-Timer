@@ -1,0 +1,462 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PresentationBase</name>
+    </assembly>
+    <members>
+        <member name="T:PresentationBase.CommandBinding">
+            <summary>
+            A markup extension to unify <see cref="T:PresentationBase.ViewModelCommand`1"/> bindings.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.CommandBinding.CommandType">
+            <summary>
+            The command type.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.CommandBinding.#ctor(System.Type)">
+            <summary>
+            Creates a new <see cref="T:PresentationBase.CommandBinding"/> instance.
+            </summary>
+            <param name="commandType">The type of the <see cref="T:PresentationBase.ViewModelCommand`1"/>.</param>
+        </member>
+        <member name="T:PresentationBase.CompositeViewModelCollection`1">
+            <summary>
+            A <see cref="T:System.Windows.Data.CompositeCollection"/> for view models.
+            It is strongly typed with <typeparamref name="TViewModel"/> and hides the underlying <see cref="T:System.Windows.Data.CollectionContainer"/>.
+            All methods for collection manipulation are dispatched to <see cref="P:System.Windows.Application.Current"/>.
+            </summary>
+            <typeparam name="TViewModel">The view model type of this composite collection.</typeparam>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.#ctor">
+            <summary>
+            Creates a new <see cref="T:PresentationBase.CompositeViewModelCollection`1"/> instance that is empty and has default initial capacity.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.#ctor(System.Int32)">
+            <summary>
+            Creates a new <see cref="T:PresentationBase.CompositeViewModelCollection`1"/> instance that is empty and has a specified initial capacity.
+            </summary>
+            <param name="capacity">The number of collections that the new list is initially capable of storing.</param>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.GetEnumerator">
+            <inheritdoc/>
+        </member>
+        <member name="P:PresentationBase.CompositeViewModelCollection`1.Item(System.Int32)">
+            <summary>
+            Indexer property that retrieves or replaces the collection at the given zero-based offset in the collection.
+            </summary>
+            <param name="collectionIndex">The zero-based offset of the collection to retrieve or replace.</param>
+            <returns>The collection at the specified zero-based offset.</returns>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.Add(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds the specified collection to this composite collection.
+            </summary>
+            <param name="collection">New collection to add.</param>
+            <returns>Zero-based index where the new collection is added.</returns>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.Clear">
+            <summary>
+            Clears the collection
+            </summary>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.Contains(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Checks to see if a given collection is in this composite collection.
+            </summary>
+            <param name="containCollection">The collection to check.</param>
+            <returns><c>true</c> if the collection contains the given collection; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.IndexOf(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Returns the index in this composite collection where the given collection is found.
+            </summary>
+            <param name="indexCollection">The collection to retrieve the index for.</param>
+            <returns>If the collection appears in the composite collection, then the zero-based index in the composite collection where the given collection is found; otherwise, <c>-1</c>.</returns>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.Insert(System.Int32,System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Inserts a collection in the composite collection at a given index.
+            All collections after the given position are moved down by one.
+            </summary>
+            <param name="insertIndex">The index to insert the collection at.</param>
+            <param name="insertCollection">The collection reference to add to the composite collection.</param>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.Remove(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Removes the given collection reference from the composite collection.
+            All remaining collections move up by one.
+            </summary>
+            <param name="removeCollection">The collection to remove.</param>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.RemoveAt(System.Int32)">
+            <summary>
+            Removes a collection from the composite collection at the given index.
+            All remaining collections move up by one.
+            </summary>
+            <param name="removeIndex">The index at which to remove a collection.</param>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.Add(System.Object)">
+            <summary>
+            Overshadowed member of the base class <see cref="T:System.Windows.Data.CompositeCollection"/>. Do not use this.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.Contains(System.Object)">
+            <summary>
+            Overshadowed member of the base class <see cref="T:System.Windows.Data.CompositeCollection"/>. Do not use this.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.IndexOf(System.Object)">
+            <summary>
+            Overshadowed member of the base class <see cref="T:System.Windows.Data.CompositeCollection"/>. Do not use this.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.Insert(System.Int32,System.Object)">
+            <summary>
+            Overshadowed member of the base class <see cref="T:System.Windows.Data.CompositeCollection"/>. Do not use this.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.CompositeViewModelCollection`1.Remove(System.Object)">
+            <summary>
+            Overshadowed member of the base class <see cref="T:System.Windows.Data.CompositeCollection"/>. Do not use this.
+            </summary>
+        </member>
+        <member name="T:PresentationBase.Converters.AllBoolToVisibilityConverter">
+            <summary>
+            Converts multiple <see cref="T:System.Boolean"/>s into a <see cref="T:System.Windows.Visibility"/>.
+            Returns <see cref="F:System.Windows.Visibility.Visible"/> when <strong>all</strong> bools are true. Otherwise <see cref="F:System.Windows.Visibility.Collapsed"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.AllBoolToVisibilityConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.AllBoolToVisibilityReversedConverter">
+            <summary>
+            Converts multiple <see cref="T:System.Boolean"/>s into a <see cref="T:System.Windows.Visibility"/>.
+            Returns <see cref="F:System.Windows.Visibility.Collapsed"/> when <strong>all</strong> bools are true. Otherwise <see cref="F:System.Windows.Visibility.Visible"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.AllBoolToVisibilityReversedConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.AnyBoolToVisibilityConverter">
+            <summary>
+            Converts multiple <see cref="T:System.Boolean"/>s into a <see cref="T:System.Windows.Visibility"/>.
+            Returns <see cref="F:System.Windows.Visibility.Visible"/> when <strong>any</strong> bool is true. Otherwise <see cref="F:System.Windows.Visibility.Collapsed"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.AnyBoolToVisibilityConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.AnyBoolToVisibilityReversedConverter">
+            <summary>
+            Converts multiple <see cref="T:System.Boolean"/>s into a <see cref="T:System.Windows.Visibility"/>.
+            Returns <see cref="F:System.Windows.Visibility.Collapsed"/> when <strong>any</strong> bool is true. Otherwise <see cref="F:System.Windows.Visibility.Visible"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.AnyBoolToVisibilityReversedConverter.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.BoolToBoolReversedConverter">
+            <summary>
+            Negates a given <see cref="T:System.Boolean"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.BoolToBoolReversedConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.Converters.BoolToBoolReversedConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.BoolToProgressStateConverter">
+            <summary>
+            Returns <see cref="F:System.Windows.Shell.TaskbarItemProgressState.Indeterminate"/> when converting <c>true</c>. Otherwise <see cref="F:System.Windows.Shell.TaskbarItemProgressState.None"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.BoolToProgressStateConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.Converters.BoolToProgressStateConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.BoolToVisibilityConverter">
+            <summary>
+            Returns <see cref="F:System.Windows.Visibility.Visible"/> when converting <c>true</c>. Otherwise <see cref="F:System.Windows.Visibility.Collapsed"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.BoolToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.Converters.BoolToVisibilityConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.BoolToVisibilityReversedConverter">
+            <summary>
+            Returns <see cref="F:System.Windows.Visibility.Collapsed"/> when converting <c>true</c>. Otherwise <see cref="F:System.Windows.Visibility.Visible"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.BoolToVisibilityReversedConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.Converters.BoolToVisibilityReversedConverter.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.ConverterBase">
+            <summary>
+            Base class for converters in PresentationBase.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.Converters.ConverterBase.Instance">
+            <inheritdoc/>
+        </member>
+        <member name="P:PresentationBase.Converters.ConverterBase.PresentationBase#Converters#IConverter#Instance">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.Converters.ConverterBase.ProvideValue(System.IServiceProvider)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.Converters.ConverterBase.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.Converters.ConverterBase.ConvertBack(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.EnumToTextConverter">
+            <summary>
+            Converts an <see cref="T:System.Enum"/> into its name by calling <see cref="M:System.Enum.GetName(System.Type,System.Object)"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.EnumToTextConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.EqualsToVisibilityConverter">
+            <summary>
+            Compares a given converter value with the given <see cref="P:System.Windows.Data.Binding.ConverterParameter"/> value.
+            Returns <see cref="F:System.Windows.Visibility.Visible"/> when both values are equal. Otherwise <see cref="F:System.Windows.Visibility.Collapsed"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.EqualsToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.IConverter">
+            <summary>
+            Every PresentationBase converter contains an instance property and a ProvideValue function.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.Converters.IConverter.Instance">
+            <summary>
+            A static instance of this value converter.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.IConverter.ProvideValue(System.IServiceProvider)">
+            <summary>
+            Needed for the implementation of <see cref="M:System.Windows.Markup.MarkupExtension.ProvideValue(System.IServiceProvider)"/>.
+            </summary>
+        </member>
+        <member name="T:PresentationBase.Converters.MultiConverterBase">
+            <summary>
+            Base class for multi converters in PresentationBase.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.Converters.MultiConverterBase.Instance">
+            <inheritdoc/>
+        </member>
+        <member name="P:PresentationBase.Converters.MultiConverterBase.PresentationBase#Converters#IConverter#Instance">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.Converters.MultiConverterBase.ProvideValue(System.IServiceProvider)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.Converters.MultiConverterBase.Convert(System.Object[],System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.Converters.MultiConverterBase.ConvertBack(System.Object,System.Type[],System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.NullToBoolConverter">
+            <summary>
+            Compares a given converter value to <see langword="null"/> and returns the result.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.NullToBoolConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.NullToBoolReversedConverter">
+            <summary>
+            Compares a given converter value to <see langword="null"/> and returns the <strong>negated</strong> result.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.NullToBoolReversedConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.NullToVisibilityConverter">
+            <summary>
+            Compares a given converter value to <see langword="null"/>.
+            Returns <see cref="F:System.Windows.Visibility.Visible"/> when <c>true</c>. Otherwise <see cref="F:System.Windows.Visibility.Collapsed"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.NullToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.NullToVisibilityReversedConverter">
+            <summary>
+            Compares a given converter value to <see langword="null"/>.
+            Returns <see cref="F:System.Windows.Visibility.Collapsed"/> when <c>true</c>. Otherwise <see cref="F:System.Windows.Visibility.Visible"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.NullToVisibilityReversedConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.VisibilityToPanningModeConverter">
+            <summary>
+            Returns the given <see cref="P:System.Windows.Data.Binding.ConverterParameter"/> value when the given conterter value is <see cref="F:System.Windows.Visibility.Visible"/>.
+            Otherwise <see cref="F:System.Windows.Controls.PanningMode.None"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.VisibilityToPanningModeConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.ZeroToVisibilityConverter">
+            <summary>
+            Returns <see cref="F:System.Windows.Visibility.Visible"/> when the given converter value is a <c>0</c> (<see cref="T:System.Int32"/>).
+            Otherwise <see cref="F:System.Windows.Visibility.Collapsed"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.ZeroToVisibilityConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Converters.ZeroToVisibilityReversedConverter">
+            <summary>
+            Returns <see cref="F:System.Windows.Visibility.Visible"/> when the given converter value is <strong>not</strong> <c>0</c> (<see cref="T:System.Int32"/>).
+            Otherwise <see cref="F:System.Windows.Visibility.Collapsed"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Converters.ZeroToVisibilityReversedConverter.Convert(System.Object,System.Type,System.Object,System.Globalization.CultureInfo)">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.Extensions.ButtonExtensions">
+            <summary>
+            Provides attached properties for <see cref="T:System.Windows.Controls.Button"/>s.
+            </summary>
+        </member>
+        <member name="F:PresentationBase.Extensions.ButtonExtensions.DialogResultProperty">
+            <summary>
+            Clicking the <see cref="T:System.Windows.Controls.Button"/> will close its parent <see cref="T:System.Windows.Window"/> with the given <see cref="P:System.Windows.Window.DialogResult"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Extensions.ButtonExtensions.GetDialogResult(System.Windows.Controls.Button)">
+            <summary>
+            Get the value of the attached property <see cref="F:PresentationBase.Extensions.ButtonExtensions.DialogResultProperty"/> for a <see cref="T:System.Windows.Controls.Button"/>.
+            </summary>
+            <param name="button">The button.</param>
+        </member>
+        <member name="M:PresentationBase.Extensions.ButtonExtensions.SetDialogResult(System.Windows.Controls.Button,System.Nullable{System.Boolean})">
+            <summary>
+            Set the value of the attached property <see cref="F:PresentationBase.Extensions.ButtonExtensions.DialogResultProperty"/> for a <see cref="T:System.Windows.Controls.Button"/>.
+            </summary>
+            <param name="button">The button.</param>
+            <param name="value">The value to set.</param>
+        </member>
+        <member name="F:PresentationBase.Extensions.ButtonExtensions.SegoeGlyphProperty">
+            <summary>
+            Contains a glyph from the <strong>Segoe MDL2 Assets</strong> font.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Extensions.ButtonExtensions.GetSegoeGlyph(System.Windows.Controls.Button)">
+            <summary>
+            Get the value of the attached property <see cref="F:PresentationBase.Extensions.ButtonExtensions.SegoeGlyphProperty"/> for a <see cref="T:System.Windows.Controls.Button"/>.
+            </summary>
+            <param name="button">The button.</param>
+        </member>
+        <member name="M:PresentationBase.Extensions.ButtonExtensions.SetSegoeGlyph(System.Windows.Controls.Button,System.String)">
+            <summary>
+            Set the value of the attached property <see cref="F:PresentationBase.Extensions.ButtonExtensions.SegoeGlyphProperty"/> for a <see cref="T:System.Windows.Controls.Button"/>.
+            </summary>
+            <param name="button">The button.</param>
+            <param name="value">The value to set.</param>
+        </member>
+        <member name="F:PresentationBase.Extensions.ButtonExtensions.SegoeGlyphSizeProperty">
+            <summary>
+            Contains a font size for the <strong>Segoe MDL2 Assets</strong> font.
+            Is used in conjunction with <see cref="F:PresentationBase.Extensions.ButtonExtensions.SegoeGlyphProperty"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Extensions.ButtonExtensions.GetSegoeGlyphSize(System.Windows.Controls.Button)">
+            <summary>
+            Get the value of the attached property <see cref="F:PresentationBase.Extensions.ButtonExtensions.SegoeGlyphSizeProperty"/> for a <see cref="T:System.Windows.Controls.Button"/>.
+            </summary>
+            <param name="button">The button.</param>
+        </member>
+        <member name="M:PresentationBase.Extensions.ButtonExtensions.SetSegoeGlyphSize(System.Windows.Controls.Button,System.Double)">
+            <summary>
+            Set the value of the attached property <see cref="F:PresentationBase.Extensions.ButtonExtensions.SegoeGlyphSizeProperty"/> for a <see cref="T:System.Windows.Controls.Button"/>.
+            </summary>
+            <param name="button">The button.</param>
+            <param name="value">The value to set.</param>
+        </member>
+        <member name="T:PresentationBase.Extensions.NaturalSortExtensions">
+            <summary>
+            Provides functions to sort collections of <see cref="T:System.String"/>s in a more natural order.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Extensions.NaturalSortExtensions.OrderByNatural``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},System.StringComparer)">
+            <summary>
+            Sorts a given <see cref="T:System.String"/> collection in an <strong>ascending</strong> natural order by considering decimal substrings.
+            </summary>
+            <typeparam name="T">The colletions generic type.</typeparam>
+            <param name="items">The collection.</param>
+            <param name="selector">The selector which converts each item from <paramref name="items"/> into a <see cref="T:System.String"/> for comparision.</param>
+            <param name="stringComparer">An optional <see cref="T:System.StringComparer"/> for sorting. Defaults to <see cref="P:System.StringComparer.CurrentCulture"/>.</param>
+            <example>A sorted output could be "Item1", "Item11", "Item105" and "Item2".</example>
+        </member>
+        <member name="M:PresentationBase.Extensions.NaturalSortExtensions.OrderByNaturalDescending``1(System.Collections.Generic.IEnumerable{``0},System.Func{``0,System.String},System.StringComparer)">
+            <summary>
+            Sorts a given <see cref="T:System.String"/> collection in a <strong>descending</strong> natural order by considering decimal substrings.
+            </summary>
+            <typeparam name="T">The colletions generic type.</typeparam>
+            <param name="items">The collection.</param>
+            <param name="selector">The selector which converts each item from <paramref name="items"/> into a <see cref="T:System.String"/> for comparision.</param>
+            <param name="stringComparer">An optional <see cref="T:System.StringComparer"/> for sorting. Defaults to <see cref="P:System.StringComparer.CurrentCulture"/>.</param>
+            <example>A sorted output could be "Item2", "Item105", "Item11" and "Item1".</example>
+        </member>
+        <member name="T:PresentationBase.Extensions.NaturalSortHelper">
+            <summary>
+            Allows to convert a given property from a view model into a <see cref="T:System.String"/> for sorting.
+            The returned <see cref="T:System.String"/> pads leading zeros to any found decimal substring.
+            This is useful when a natrual sort is needed that should integrate into WPFs binding system without much effort.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.Extensions.NaturalSortHelper.ParentViewModel">
+            <summary>
+            The parent view model.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Extensions.NaturalSortHelper.#ctor(PresentationBase.ViewModel)">
+            <summary>
+            Creates a new instance of <see cref="T:PresentationBase.Extensions.NaturalSortHelper"/>.
+            </summary>
+            <param name="viewModel">The parent view model.</param>
+        </member>
+        <member name="P:PresentationBase.Extensions.NaturalSortHelper.Item(System.String)">
+            <summary>
+            Takes a property name of the <see cref="P:PresentationBase.Extensions.NaturalSortHelper.ParentViewModel"/>.
+            Returns a <see cref="T:System.String"/> with leading zeros for any decimal substring found.
+            </summary>
+            <param name="propertyName">The name of an existing property of <see cref="P:PresentationBase.Extensions.NaturalSortHelper.ParentViewModel"/>.</param>
+        </member>
+        <member name="T:PresentationBase.UiHelper">
+            <summary>
+            Provides functions for traversing and searching the visual tree.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.UiHelper.TryFindChild``1(System.Windows.DependencyObject,System.String)">
+            <summary>
+            Tries to find a child in the visual tree with the given type <typeparamref name="T"/> and <paramref name="childName"/>.
+            </summary>
+            <typeparam name="T">The type of the child to find</typeparam>
+            <param name="parent">The parent containing the child.</param>
+            <param name="childName">The <see cref="P:System.Windows.FrameworkElement.Name"/> of the child to find.</param>
+        </member>
+    </members>
+</doc>

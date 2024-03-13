@@ -1,0 +1,626 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>PresentationBase.Core</name>
+    </assembly>
+    <members>
+        <member name="T:PresentationBase.Bindable">
+            <summary>
+            The base implementation of <see cref="T:PresentationBase.IBindable"/>.
+            </summary>
+        </member>
+        <member name="E:PresentationBase.Bindable.PropertyChanging">
+            <summary>
+            Implementation of <see cref="E:System.ComponentModel.INotifyPropertyChanging.PropertyChanging"/>.
+            Is used to notify that a property is about to be changed.
+            <br/>
+            It is raised before changing the property backing field and <see cref="E:PresentationBase.Bindable.PropertyChanged"/>.
+            </summary>
+            <remarks>
+            Please note that this does not imply that a property change can be canceled.
+            </remarks>
+        </member>
+        <member name="E:PresentationBase.Bindable.PropertyChanged">
+            <summary>
+            Implementation of <see cref="E:System.ComponentModel.INotifyPropertyChanged.PropertyChanged"/>.
+            Is used to support bindings between views and bindable properties.
+            <br/>
+            It is raised after <see cref="E:PresentationBase.Bindable.PropertyChanging"/> and changing the property backing field.
+            </summary>
+        </member>
+        <member name="E:PresentationBase.Bindable.ErrorsChanged">
+            <summary>
+            Implementation of <see cref="E:System.ComponentModel.INotifyDataErrorInfo.ErrorsChanged"/>.
+            Is used to validate bound properties (or the bindable itself) for bindings.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Bindable.RaiseAllPropertiesChanged">
+            <summary>
+            Raises the <see cref="E:PresentationBase.Bindable.PropertyChanged"/> event for all properties.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Bindable.RaisePropertyChanging(System.String)">
+            <summary>
+            Raises the <see cref="E:PresentationBase.Bindable.PropertyChanging"/> event for the given property name.
+            </summary>
+            <param name="propertyName">The name of the property which is about to be changed. When omitted the property name will be the member name of the caller (which it is when called from the bindable property setter).</param>
+        </member>
+        <member name="M:PresentationBase.Bindable.RaisePropertyChanged(System.String)">
+            <summary>
+            Raises the <see cref="E:PresentationBase.Bindable.PropertyChanged"/> event for the given property name.
+            </summary>
+            <param name="propertyName">The name of the property which has been changed. When omitted the property name will be the member name of the caller (which it is when called from the bindable property setter).</param>
+        </member>
+        <member name="M:PresentationBase.Bindable.SetProperty``1(``0@,``0,System.Func{``0,System.Collections.Generic.IEnumerable{System.String}},System.String)">
+            <summary>
+            Sets the property value, ensures bindings are updated and validates (if <paramref name="propertyValidation"/> is set).<para/>
+            Updates will be skipped (except for validation) if the <paramref name="newValue"/> equals the previous property value.
+            </summary>
+            <typeparam name="T">The type of the changed property.</typeparam>
+            <param name="propertyField">The property field which contains the old value.</param>
+            <param name="newValue">The new value to set.</param>
+            <param name="propertyValidation">An optional function used for validation of the changed property. It must return a collection of error messages.</param>
+            <param name="propertyName">The name of the property which has been changed. When omitted the property name will be the member name of the caller (which it is when called from the bindable property setter).</param>
+            <returns>Returns <c>true</c> if the new value was set.</returns>
+        </member>
+        <member name="M:PresentationBase.Bindable.PreSetProperty``1(``0@,``0,System.Func{``0,System.Collections.Generic.IEnumerable{System.String}},System.String)">
+            <summary>
+            Can be overwritten to extend <see cref="M:PresentationBase.Bindable.SetProperty``1(``0@,``0,System.Func{``0,System.Collections.Generic.IEnumerable{System.String}},System.String)"/>.<para/>
+            This method is called <strong>before</strong> <see cref="E:PresentationBase.Bindable.PropertyChanging"/> is raised and <strong>before</strong> the backing field <paramref name="propertyField"/> is set.
+            </summary>
+            <typeparam name="T">The type of the changed property.</typeparam>
+            <param name="propertyField">The property field which contains the old value.</param>
+            <param name="newValue">The new value to set.</param>
+            <param name="propertyValidation">An optional function used for validation of the changed property. It must return a collection of error messages.</param>
+            <param name="propertyName">The name of the property which has been changed. When omitted the property name will be the member name of the caller (which it is when called from the bindable property setter).</param>
+        </member>
+        <member name="M:PresentationBase.Bindable.PostSetProperty``1(``0@,``0,System.Func{``0,System.Collections.Generic.IEnumerable{System.String}},System.String)">
+            <summary>
+            Can be overwritten to extend <see cref="M:PresentationBase.Bindable.SetProperty``1(``0@,``0,System.Func{``0,System.Collections.Generic.IEnumerable{System.String}},System.String)"/>.<para/>
+            This method is called <strong>after</strong> the backing field <paramref name="propertyField"/> is set and <strong>before</strong> <see cref="E:PresentationBase.Bindable.PropertyChanged"/> is raised.
+            </summary>
+            <typeparam name="T">The type of the changed property.</typeparam>
+            <param name="propertyField">The property field which contains the old value.</param>
+            <param name="newValue">The new value to set.</param>
+            <param name="propertyValidation">An optional function used for validation of the changed property. It must return a collection of error messages.</param>
+            <param name="propertyName">The name of the property which has been changed. When omitted the property name will be the member name of the caller (which it is when called from the bindable property setter).</param>
+        </member>
+        <member name="P:PresentationBase.Bindable.HasErrors">
+            <summary>
+            If any property or the bindable itself has failed validation.<para/>
+            </summary>
+            <remarks>Overwrite this for custom validation like requiring valid children.</remarks>
+        </member>
+        <member name="P:PresentationBase.Bindable.IsValid">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.Bindable.GetErrors(System.String)">
+            <summary>
+            Returns all errors for a given <paramref name="propertyName"/> or for the entire bindable.
+            </summary>
+            <param name="propertyName">The property name. Set to <see langword="null"/> to get all bindable errors.</param>
+        </member>
+        <member name="M:PresentationBase.Bindable.ClearAllErrors">
+            <summary>
+            Clears both bindable and all property errors.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Bindable.ClearBindableErrors">
+            <summary>
+            Clears all bindable errors.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Bindable.ClearPropertyErrors(System.String)">
+            <summary>
+            Clears all property errors for the given <paramref name="propertyName"/>.
+            </summary>
+            <param name="propertyName">The property name.</param>
+        </member>
+        <member name="M:PresentationBase.Bindable.AddBindableErrors(System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+            <summary>
+            Adds a collection of error messages which invalidate the entire bindable.
+            </summary>
+            <param name="errorMessages">The collection of error messages.</param>
+            <param name="clearPreviousErrors">If the previous errors should be cleared before adding the new ones.</param>
+        </member>
+        <member name="M:PresentationBase.Bindable.AddPropertyErrors(System.String,System.Collections.Generic.IEnumerable{System.String},System.Boolean)">
+            <summary>
+            Adds a collection of error messages for the given <paramref name="propertyName"/>.
+            </summary>
+            <param name="propertyName">The property name.</param>
+            <param name="errorMessages">The collection of error messages.</param>
+            <param name="clearPreviousErrors">If the previous errors should be cleared before adding the new ones.</param>
+        </member>
+        <member name="M:PresentationBase.Bindable.RaiseBindableErrorsChanged">
+            <summary>
+            Raises the <see cref="E:PresentationBase.Bindable.ErrorsChanged"/> event for bindable errors.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Bindable.RaisePropertyErrorsChanged(System.String)">
+            <summary>
+            Raises the <see cref="E:PresentationBase.Bindable.ErrorsChanged"/> event for the given <paramref name="propertyName"/>.
+            </summary>
+            <param name="propertyName">The property name.</param>
+        </member>
+        <member name="T:PresentationBase.Dispatcher">
+            <summary>
+            A dispatcher used internally for actions which must be executed in a special context.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.Dispatcher.Dispatch(System.Action)">
+            <summary>
+            Dispatches the given <paramref name="action"/>.
+            </summary>
+            <param name="action">The action to dispatch.</param>
+        </member>
+        <member name="M:PresentationBase.Dispatcher.DispatchImpl(System.Action)">
+            <summary>
+            Specific dispatcher implementation.
+            </summary>
+            <param name="action">The action to dispatch.</param>
+        </member>
+        <member name="T:PresentationBase.DtoConverters.DtoAttribute">
+            <summary>
+            Links a view model to one or multiple data transfer objects.
+            This enables conversion with <see cref="M:PresentationBase.DtoConverters.DtoConverterExtensions.ToDto``1(PresentationBase.ViewModel)"/> and <see cref="M:PresentationBase.DtoConverters.DtoConverterExtensions.ToViewModel``1(System.Object)"/>./>
+            </summary>
+        </member>
+        <member name="P:PresentationBase.DtoConverters.DtoAttribute.Type">
+            <summary>
+            The data transfer object type.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.DtoConverters.DtoAttribute.#ctor(System.Type)">
+            <summary>
+            Creates a new <see cref="T:PresentationBase.DtoConverters.DtoAttribute"/> instance.
+            </summary>
+            <param name="type">The data transfer object type.</param>
+        </member>
+        <member name="M:PresentationBase.DtoConverters.DtoAttribute.GetDtoAttributes(System.Type)">
+            <summary>
+            Returns all <see cref="T:PresentationBase.DtoConverters.DtoAttribute"/>s found for a given view model type.
+            </summary>
+            <param name="viewModelType">The view model type.</param>
+        </member>
+        <member name="T:PresentationBase.DtoConverters.DtoConverterExtensions">
+            <summary>
+            Contains extension methods for converstion between view models and data transfer objects.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.DtoConverters.DtoConverterExtensions.ToViewModel``1(System.Object)">
+            <summary>
+            Creates a view model from a given data transfer object.
+            The view model must use <see cref="T:PresentationBase.DtoConverters.DtoAttribute"/> and <see cref="T:PresentationBase.DtoConverters.DtoPropertyAttribute"/> for the conversion to work.
+            </summary>
+            <remarks>
+            Please note that properties with reference types will <strong>not</strong> be cloned (the reference is copied instead).
+            </remarks>
+            <typeparam name="TViewModel">The view model type to create.</typeparam>
+            <param name="dto">The data transfer object to convert.</param>
+            <returns>The converted view model.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="dto"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.NotSupportedException">Thrown if a cyclic relationship is detected.</exception>
+            <exception cref="T:System.InvalidCastException">Thrown if <typeparamref name="TViewModel"/> has no <see cref="T:PresentationBase.DtoConverters.DtoAttribute"/> for the given <paramref name="dto"/>.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown if a property marked with <see cref="T:PresentationBase.DtoConverters.DtoAttribute" /> has no matching property in <paramref name="dto"/>.</exception>
+        </member>
+        <member name="M:PresentationBase.DtoConverters.DtoConverterExtensions.ToDto``1(PresentationBase.ViewModel)">
+            <summary>
+            Creates a data transfer object from a given view model.
+            The view model must use <see cref="T:PresentationBase.DtoConverters.DtoAttribute"/> and <see cref="T:PresentationBase.DtoConverters.DtoPropertyAttribute"/> for the conversion to work.
+            </summary>
+            <remarks>
+            Please note that properties with reference types will <strong>not</strong> be cloned (the reference is copied instead).
+            </remarks>
+            <typeparam name="TDto">The data transfer object type to create.</typeparam>
+            <param name="viewModel">The view model to convert.</param>
+            <returns>The converted data transfer object.</returns>
+            <exception cref="T:System.ArgumentNullException">Thrown if <paramref name="viewModel"/> is <see langword="null"/>.</exception>
+            <exception cref="T:System.NotSupportedException">Thrown if a cyclic relationship is detected.</exception>
+            <exception cref="T:System.InvalidCastException">Thrown if <paramref name="viewModel"/> has no <see cref="T:PresentationBase.DtoConverters.DtoAttribute"/> for the desired <typeparamref name="TDto"/>.</exception>
+            <exception cref="T:System.InvalidOperationException">Thrown if a property marked with <see cref="T:PresentationBase.DtoConverters.DtoAttribute" /> has no matching property in <typeparamref name="TDto"/>.</exception>
+        </member>
+        <member name="T:PresentationBase.DtoConverters.DtoPropertyAttribute">
+            <summary>
+            Links a view model property to a data transfer object property.
+            This enables conversion with <see cref="M:PresentationBase.DtoConverters.DtoConverterExtensions.ToDto``1(PresentationBase.ViewModel)"/> and <see cref="M:PresentationBase.DtoConverters.DtoConverterExtensions.ToViewModel``1(System.Object)"/>./>
+            </summary>
+        </member>
+        <member name="P:PresentationBase.DtoConverters.DtoPropertyAttribute.PropertyName">
+            <summary>
+            The data transfer object property name.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.DtoConverters.DtoPropertyAttribute.Type">
+            <summary>
+            The data transfer object type.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.DtoConverters.DtoPropertyAttribute.#ctor(System.String,System.Type)">
+            <summary>
+            Creates a new <see cref="T:PresentationBase.DtoConverters.DtoPropertyAttribute"/> instance.
+            </summary>
+            <param name="propertyName">The data transfer object property name.</param>
+            <param name="type">Specifies the dto type the <paramref name="propertyName"/> refers to.</param>
+        </member>
+        <member name="M:PresentationBase.DtoConverters.DtoPropertyAttribute.GetDtoPropertyAttributes(System.Reflection.PropertyInfo)">
+            <summary>
+            Returns all <see cref="T:PresentationBase.DtoConverters.DtoPropertyAttribute"/>s found for a given <see cref="T:System.Reflection.PropertyInfo"/>.
+            </summary>
+            <param name="viewModelPropertyInfo">The property info.</param>
+        </member>
+        <member name="T:PresentationBase.IBindable">
+            <summary>
+            Provides an interface for binding to properties, keeping track of property changes and property validation.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.IBindable.IsValid">
+            <summary>
+            This is the inverse of <see cref="P:System.ComponentModel.INotifyDataErrorInfo.HasErrors"/>.
+            </summary>
+        </member>
+        <member name="T:PresentationBase.ITrxViewModel">
+            <summary>
+            Extends the base <see cref="T:PresentationBase.ViewModel"/> implementation with the ability to rollback property changes.
+            <br/><br/>
+            <strong>Short-term</strong> transactions are managed with <see cref="M:System.ComponentModel.IEditableObject.BeginEdit"/>, <see cref="M:System.ComponentModel.IEditableObject.EndEdit"/> and <see cref="M:System.ComponentModel.IEditableObject.CancelEdit"/>.
+            <br/>
+            <strong>Long-term</strong> transactions use <see cref="M:System.ComponentModel.IChangeTracking.AcceptChanges"/> and <see cref="M:System.ComponentModel.IRevertibleChangeTracking.RejectChanges"/>.
+            </summary>
+            <remarks>
+            Please note that only <see langword="public"/> properties (found by <see cref="T:System.ComponentModel.TypeDescriptor"/>) can be rolled back.
+            </remarks>
+        </member>
+        <member name="P:PresentationBase.ITrxViewModel.IsEditing">
+            <summary>
+            Indicates that <see cref="M:System.ComponentModel.IEditableObject.BeginEdit"/> has been called and a transaction is ongoing.
+            Remains <see langword="true"/> until <see cref="M:System.ComponentModel.IEditableObject.EndEdit"/> or <see cref="M:System.ComponentModel.IEditableObject.CancelEdit"/> are called.
+            </summary>
+        </member>
+        <member name="T:PresentationBase.IViewModel">
+            <summary>
+            Inherits the property change tracking and validation from <see cref="T:PresentationBase.IBindable"/>.
+            Adds commands, a tree structure and useful properties.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.IViewModel.Commands">
+            <summary>
+            A dictionary filled with commands for this view model. The key is the <see cref="T:System.Type"/> of the command.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.IViewModel.ParentViewModel">
+            <summary>
+            The logical parent of this view model.
+            </summary>
+            <remarks>
+            Please note that circular references are not supported.
+            This is a weak reference and can be <see langword="null"/> if the parent has been garbage collected.
+            </remarks>
+        </member>
+        <member name="P:PresentationBase.IViewModel.RootViewModel">
+            <summary>
+            The top most parent of this view model.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.IViewModel.IsDirty">
+            <summary>
+            Indicates that there are changes made to this view model since its creation.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.IViewModel.IsRefreshing">
+            <summary>
+            Indicates that this view model is changing and others should avoid interfering.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.IViewModel.Tag">
+            <summary>
+            A multi purpose <see cref="T:System.Object"/> tag for this view model.
+            </summary>
+            <remarks>Use it for e.g. identifying this view model.</remarks>
+        </member>
+        <member name="T:PresentationBase.IViewModelCommand">
+            <summary>
+            The interface for view model commands.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.IViewModelCommand.RaiseCanExecuteChanged">
+            <summary>
+            Raises <see cref="E:System.Windows.Input.ICommand.CanExecuteChanged"/> and causes <see cref="M:PresentationBase.IViewModelCommand.CanExecute(PresentationBase.ViewModel)"/> to be reevaluated.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.IViewModelCommand.CanExecute(PresentationBase.ViewModel)">
+            <summary>
+            Returns if the command can be executed for the given view model.
+            </summary>
+            <param name="parameter">The view model this command would be executed on.</param>
+            <returns>Returns if <see cref="M:PresentationBase.IViewModelCommand.Execute(PresentationBase.ViewModel)"/> is allowed for the given <paramref name="parameter"/>.</returns>
+        </member>
+        <member name="M:PresentationBase.IViewModelCommand.Execute(PresentationBase.ViewModel)">
+            <summary>
+            Executes the command for the given view model.
+            </summary>
+            <param name="parameter">The view model this command is executed on.</param>
+        </member>
+        <member name="T:PresentationBase.IViewModelCommandAsync">
+            <summary>
+            The interface for <strong>asynchronous</strong> view model commands.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.IViewModelCommandAsync.ExecuteAsync(PresentationBase.ViewModel)">
+            <summary>
+            Executes the command for the given view model <strong>asynchronously</strong>.
+            </summary>
+            <param name="parameter">The view model this command is executed on.</param>
+        </member>
+        <member name="P:PresentationBase.IViewModelCommandAsync.IsWorking">
+            <summary>
+            Indicates if the command is running right now.
+            </summary>
+        </member>
+        <member name="T:PresentationBase.ObservableViewModelCollection`1">
+            <summary>
+            An <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> for view models.
+            It ensures that the <see cref="P:PresentationBase.ViewModel.ParentViewModel"/> property is correctly set when working on collections.
+            Also adds methods for collection manipulation.
+            </summary>
+            <typeparam name="TViewModel">The view model type of this collection.</typeparam>
+        </member>
+        <member name="M:PresentationBase.ObservableViewModelCollection`1.#ctor(PresentationBase.ViewModel)">
+            <summary>
+            Creates a new <see cref="T:System.Collections.ObjectModel.ObservableCollection`1"/> instance.
+            </summary>
+            <param name="viewModel">The parent view model.</param>
+        </member>
+        <member name="M:PresentationBase.ObservableViewModelCollection`1.Observe(System.Action,System.String[])">
+            <summary>
+            Observes the child view models for changes to the properties defined in <paramref name="propertyNames"/>.
+            When changes are detected then <paramref name="action"/> is invoked.
+            </summary>
+            <param name="action">The action to invoke on observed change.</param>
+            <param name="propertyNames">The properties to observe for changes.</param>
+        </member>
+        <member name="M:PresentationBase.ObservableViewModelCollection`1.Observe(System.Action{System.String},System.String[])">
+            <summary>
+            Observes the child view models for changes to the properties defined in <paramref name="propertyNames"/>.
+            When changes are detected then <paramref name="action"/> is invoked.
+            </summary>
+            <param name="action">The action to invoke on observed change. The parameter is the name of the changed property.</param>
+            <param name="propertyNames">The properties to observe for changes.</param>
+        </member>
+        <member name="M:PresentationBase.ObservableViewModelCollection`1.Add(`0)">
+            <summary>
+            Adds a view model to the end of the collection.
+            </summary>
+            <param name="item">The view model to add.</param>
+        </member>
+        <member name="M:PresentationBase.ObservableViewModelCollection`1.AddRange(System.Collections.Generic.IEnumerable{`0})">
+            <summary>
+            Adds multiple view models to the end of the collection.
+            </summary>
+            <param name="collection">The view models to add.</param>
+        </member>
+        <member name="M:PresentationBase.ObservableViewModelCollection`1.Replace(`0[])">
+            <summary>
+            Clears the collection and adds the given view models.
+            </summary>
+            <param name="collection">The replacement view models.</param>
+        </member>
+        <member name="M:PresentationBase.ObservableViewModelCollection`1.Clear">
+            <summary>
+            Clears the collection.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.ObservableViewModelCollection`1.Insert(System.Int32,`0)">
+            <summary>
+            Inserts a view model at the given <paramref name="index"/> to the collection.
+            </summary>
+            <param name="index">The index at which the view model is inserted.</param>
+            <param name="item">The view model to insert.</param>
+        </member>
+        <member name="M:PresentationBase.ObservableViewModelCollection`1.Remove(`0)">
+            <summary>
+            Removes a view model from the collection.
+            </summary>
+            <param name="item">The view model to remove.</param>
+            <returns>Returns <c>true</c> if the view model was found and removed. Returns <c>false</c> otherwise.</returns>
+        </member>
+        <member name="M:PresentationBase.ObservableViewModelCollection`1.RemoveAt(System.Int32)">
+            <summary>
+            Removes a view model at the given <paramref name="index"/>.
+            </summary>
+            <param name="index">The index of the view model to remove.</param>
+        </member>
+        <member name="T:PresentationBase.TrxViewModel">
+            <summary>
+            The base implementation of <see cref="T:PresentationBase.ITrxViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.TrxViewModel.#ctor">
+            <summary>
+            Creates a new <see cref="T:PresentationBase.TrxViewModel"/> instance.
+            Ensures that a snapshot is available for rollbacks.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.TrxViewModel.IsEditing">
+            <inheritdoc/>
+        </member>
+        <member name="P:PresentationBase.TrxViewModel.IsChanged">
+            <inheritdoc/>
+            <remarks>
+            Please note that <see cref="P:PresentationBase.TrxViewModel.IsChanged"/> is set to <see langword="true"/> whenever <see cref="E:PresentationBase.Bindable.PropertyChanged"/> is raised.
+            <see cref="P:PresentationBase.ViewModel.IsDirty"/> is a similar but independent property.
+            </remarks>
+        </member>
+        <member name="M:PresentationBase.TrxViewModel.BeginEdit">
+            <inheritdoc/>
+            <exception cref="T:System.InvalidOperationException">Thrown when a previous <see cref="M:PresentationBase.TrxViewModel.BeginEdit"/> has not ended or canceled.</exception>
+        </member>
+        <member name="M:PresentationBase.TrxViewModel.CancelEdit">
+            <inheritdoc/>
+            <exception cref="T:System.InvalidOperationException">Thrown when there is no ongoing <see cref="M:PresentationBase.TrxViewModel.BeginEdit"/>.</exception>
+        </member>
+        <member name="M:PresentationBase.TrxViewModel.EndEdit">
+            <inheritdoc/>
+            <exception cref="T:System.InvalidOperationException">Thrown when there is no ongoing <see cref="M:PresentationBase.TrxViewModel.BeginEdit"/>.</exception>
+        </member>
+        <member name="M:PresentationBase.TrxViewModel.AcceptChanges">
+            <inheritdoc/>
+        </member>
+        <member name="P:PresentationBase.TrxViewModel.IsRejectingChanges">
+            <summary>
+            Indicates that <see cref="M:PresentationBase.TrxViewModel.RejectChanges"/> is ongoing.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.TrxViewModel.RejectChanges">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.ViewModel">
+            <summary>
+            The base implementation of <see cref="T:PresentationBase.IViewModel"/>.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.ViewModel.#ctor">
+            <summary>
+            Creates a new <see cref="T:PresentationBase.ViewModel"/> instance.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.ViewModel.PreSetProperty``1(``0@,``0,System.Func{``0,System.Collections.Generic.IEnumerable{System.String}},System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.ViewModel.PostSetProperty``1(``0@,``0,System.Func{``0,System.Collections.Generic.IEnumerable{System.String}},System.String)">
+            <inheritdoc/>
+        </member>
+        <member name="P:PresentationBase.ViewModel.ParentViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:PresentationBase.ViewModel.RootViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.ViewModel.AddCommands(PresentationBase.IViewModelCommand[])">
+            <summary>
+            Adds commands to this view model.
+            This ensures that <see cref="M:System.Windows.Input.ICommand.CanExecute(System.Object)"/> is called whenever a property was changed.
+            </summary>
+            <param name="commands">The commands to add.</param>
+        </member>
+        <member name="M:PresentationBase.ViewModel.RemoveCommands(PresentationBase.IViewModelCommand[])">
+            <summary>
+            Removes existing commands for this view model.
+            </summary>
+            <param name="commands">The commands to remove.</param>
+        </member>
+        <member name="P:PresentationBase.ViewModel.Commands">
+            <inheritdoc/>
+        </member>
+        <member name="P:PresentationBase.ViewModel.Tag">
+            <inheritdoc/>
+        </member>
+        <member name="P:PresentationBase.ViewModel.AlwaysIgnoredDirtyProperties">
+            <summary>
+            A collection of properties which are always ignored (and cannot be overwritten like <see cref="P:PresentationBase.ViewModel.IgnoredDirtyProperties"/>).
+            </summary>
+            <remarks>Overwrite this to ignore properties.</remarks>
+        </member>
+        <member name="P:PresentationBase.ViewModel.IgnoredDirtyProperties">
+            <summary>
+            A collection of property names which do not set the <see cref="P:PresentationBase.ViewModel.IsDirty"/> flag when changed.
+            </summary>
+        </member>
+        <member name="P:PresentationBase.ViewModel.IsDirty">
+            <inheritdoc/>
+        </member>
+        <member name="P:PresentationBase.ViewModel.IsRefreshing">
+            <inheritdoc/>
+            <remarks>
+            There is no interaction with this property in the <see cref="T:PresentationBase.ViewModel"/> base class.
+            Derived classes can use it for their own purposes.
+            </remarks>
+        </member>
+        <member name="F:PresentationBase.ViewModel.KnownCommands">
+            <summary>
+            A list containing all known commands found with reflection.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.ViewModel.ReInitializeCommands">
+            <summary>
+            Reinitializes the <see cref="F:PresentationBase.ViewModel.KnownCommands"/> list for command and view model interaction.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.ViewModel.ReInitializeCommands(System.Collections.Generic.IEnumerable{System.Type})">
+            <summary>
+            Tries to instantiate the given types and adds them to <see cref="F:PresentationBase.ViewModel.KnownCommands"/>.
+            The <see cref="F:PresentationBase.ViewModel.KnownCommands"/> list will be cleared first.
+            </summary>
+            <param name="commandTypes">The command types to instantiate and add.</param>
+        </member>
+        <member name="T:PresentationBase.ViewModelCommand`1">
+            <summary>
+            The base implementation of commands for view models.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+        </member>
+        <member name="E:PresentationBase.ViewModelCommand`1.CanExecuteChanged">
+            <summary>
+            Raised when changes to the view model were made and <see cref="M:PresentationBase.ViewModelCommand`1.CanExecute(`0)"/> should be reevaluated.
+            </summary>
+        </member>
+        <member name="M:PresentationBase.ViewModelCommand`1.CanExecute(`0)">
+            <summary>
+            Returns if the command can be executed for the given view model.
+            </summary>
+            <remarks>
+            Please note that this function might be called frequently. So make sure that this call is as inexpensive as possible.
+            </remarks>
+            <param name="parameter">The view model this command would be executed on.</param>
+            <returns>Returns if <see cref="M:PresentationBase.ViewModelCommand`1.Execute(`0)"/> is allowed for the given <paramref name="parameter"/>.</returns>
+        </member>
+        <member name="M:PresentationBase.ViewModelCommand`1.Execute(`0)">
+            <summary>
+            Executes the command for the given view model.
+            </summary>
+            <param name="parameter">The view model this command is executed on.</param>
+        </member>
+        <member name="M:PresentationBase.ViewModelCommand`1.RaiseCanExecuteChanged">
+            <inheritdoc/>
+        </member>
+        <member name="T:PresentationBase.ViewModelCommandAsync`1">
+            <summary>
+            The base implementation of <strong>asynchronous</strong> commands for view models.
+            </summary>
+            <typeparam name="TViewModel">The type of the view model.</typeparam>
+        </member>
+        <member name="M:PresentationBase.ViewModelCommandAsync`1.ExecutionAsync(`0)">
+            <summary>
+            The implementation of the asynchronous execution.
+            It should make use of the async/await pattern.
+            </summary>
+            <param name="parameter">The view model this command is executed on.</param>
+        </member>
+        <member name="M:PresentationBase.ViewModelCommandAsync`1.Execute(`0)">
+            <summary>
+            Executes the command asynchronously in a <strong>fire and forget</strong> way.<para/>
+            This means the command is executed and its result is forgotten.
+            Any uncaught exceptions will be handled in <see cref="M:PresentationBase.ViewModelCommandAsync`1.HandleUncaughtException(`0,System.Exception)"/>.
+            </summary>
+            <param name="parameter">The view model this command is executed on.</param>
+        </member>
+        <member name="M:PresentationBase.ViewModelCommandAsync`1.CanExecute(`0)">
+            <inheritdoc/>
+        </member>
+        <member name="M:PresentationBase.ViewModelCommandAsync`1.ExecuteAsync(`0)">
+            <summary>
+            Executes the command for the given view model <strong>asynchronously</strong>.
+            </summary>
+            <param name="parameter">The view model this command is executed on.</param>
+        </member>
+        <member name="M:PresentationBase.ViewModelCommandAsync`1.HandleUncaughtException(`0,System.Exception)">
+            <summary>
+            Handles any uncaught exceptions thrown by <see cref="M:PresentationBase.ViewModelCommandAsync`1.Execute(`0)"/>.
+            </summary>
+            <param name="parameter">The view model this command was executed on.</param>
+            <param name="ex">The uncaught exception from execution.</param>
+        </member>
+        <member name="P:PresentationBase.ViewModelCommandAsync`1.IsWorking">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

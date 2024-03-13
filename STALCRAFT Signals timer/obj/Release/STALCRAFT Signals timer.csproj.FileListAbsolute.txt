@@ -1,0 +1,44 @@
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\SC SignalHelper.exe.config
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\SC SignalHelper.exe
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\SC SignalHelper.pdb
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\HotkeyListener.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\Microsoft.IdentityModel.Logging.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\Microsoft.IdentityModel.Protocols.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\Microsoft.IdentityModel.Tokens.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\PresentationBase.Core.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\PresentationBase.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Buffers.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Memory.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Numerics.Vectors.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Text.Encodings.Web.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Text.Json.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Threading.Tasks.Extensions.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.ValueTuple.dll
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\HotkeyListener.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\Microsoft.Bcl.AsyncInterfaces.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\Microsoft.IdentityModel.Abstractions.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\Microsoft.IdentityModel.Logging.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\Microsoft.IdentityModel.Protocols.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\Microsoft.IdentityModel.Tokens.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\PresentationBase.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\PresentationBase.Core.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Buffers.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Memory.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Numerics.Vectors.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Text.Encodings.Web.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Text.Json.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.Threading.Tasks.Extensions.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\System.ValueTuple.xml
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\obj\Release\STALCRAFT Signals timer.csproj.AssemblyReference.cache
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\obj\Release\STALCRAFT_Signals_timer.Form1.resources
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\obj\Release\STALCRAFT_Signals_timer.Properties.Resources.resources
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\obj\Release\STALCRAFT Signals timer.csproj.GenerateResource.cache
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\obj\Release\STALCRAFT Signals timer.csproj.CoreCompileInputs.cache
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\obj\Release\STALCRAFT Signals timer.csproj.CopyComplete
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\obj\Release\SC SignalHelper.exe
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\obj\Release\SC SignalHelper.pdb
+C:\Users\monah\source\repos\STALCRAFT Signals timer\STALCRAFT Signals timer\bin\Release\SC SignalHelper.xml
