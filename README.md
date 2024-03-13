@@ -1,0 +1,1 @@
+Релиз в папке [a link]([https://github.com/user/repo/blob/branch/other_file.md](https://github.com/vicjeffi/STALCRAFT-Signals-Timer/tree/main/STALCRAFT%20Signals%20timer/bin/Release)https://github.com/vicjeffi/STALCRAFT-Signals-Timer/tree/main/STALCRAFT%20Signals%20timer/bin/Release)
